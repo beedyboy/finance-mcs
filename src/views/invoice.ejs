@@ -1,0 +1,45 @@
+<%- include('layout.ejs'); %> 
+<div class="container-fluid">
+    <h3>Invoice</h3>
+    <dl class="row col-md-3">
+        <dt class="col-sm-9">Reference:</dt>
+        <dd class="col-sm-3"><%= invoice.reference %></dd>
+        <dt class="col-sm-9">Student ID:</dt>
+        <dd class="col-sm-3"><%= invoice.account.studentId %></dd>
+        <dt class="col-sm-9">Amount:</dt>
+        <dd class="col-sm-3"><%= invoice.amount %></dd> 
+        <dt class="col-sm-9">Due Date:</dt>
+        <dd class="col-sm-3"><%= invoice.dueDate %></dd> 
+        <dt class="col-sm-9">Type:</dt>
+        <dd class="col-sm-3"><%= invoice.type %></dd>
+        <dt class="col-sm-9">Status:</dt>
+        <dd class="col-sm-3"><%= invoice.status %></dd>
+    </dl>
+    <div class="row">
+        <div class="btn-group">
+            <div class="col-xs-6">
+                <a class="btn btn-secondary btn-block" href="/portal" role="button">Find
+                    Another Invoice</a>
+            </div>
+            <div class="col-xs-6">
+                <% if(invoice.status == 'OUTSTANDING') {%>
+                <div>
+                    <form action="/portal/pay" th:object="${invoice}" method="post">
+                        <input type="hidden" id="reference" name="reference" value= <%= invoice.reference %> />
+                        <button class="btn btn-primary btn-block" type="submit" name="pay" value="submit">Pay Invoice
+                        </button>
+                    </form>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <% if(message) {%>
+    
+        <div class="alert alert-success w-25"><%= message %></div>
+        <% } %>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<%- include('layout.ejs'); %>
+<div class="container-fluid">
+    <form action="/portal/invoice"  method="post">
+        <div class="mb-3">
+            <label for="reference" class="form-label">Invoice Reference:</label>
+            <input type="text" class="form-control w-25" id="reference" name="reference" aria-describedby="referenceHelp"
+            >
+            <div id="referenceHelp" class="form-text">Enter your unique invoice reference number.</div>
+           <% if(error) {%> 
+            <div id="alert" class="alert alert-warning w-25" role="alert"><%= error %>
+       </div>
+        <% } %>
+        </div>
+        <button type="submit" class="btn btn-primary">Find Invoice</button>
+    </form>
+</div>
+</body>
+</html>
